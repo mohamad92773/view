@@ -1,4 +1,5 @@
 import os
+token = os.environ.get("TOKEN")
 import telebot
 import requests
 from telebot import types
