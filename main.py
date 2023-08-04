@@ -1,12 +1,12 @@
 import os
-token = os.environ.get("TOKEN")
+tokenimport os
 import telebot
 import requests
 from telebot import types
 from threading import Thread
 from time import sleep
 
-token = "6491735739:AAHrcYJo7mACM3dWPPwZHG5ua7oM-JDn14M"
+token = os.environ.get("TOKEN")
 bot = telebot.TeleBot(token)
 
 keys = [
