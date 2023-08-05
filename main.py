@@ -6,7 +6,7 @@ from telebot import types
 from threading import Thread
 from time import sleep
 
-token = os.environ.get("TOKEN")
+token = "6491735739:AAHrcYJo7mACM3dWPPwZHG5ua7oM-JDn14M"
 bot = telebot.TeleBot(token)
 
 keys = [
