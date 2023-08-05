@@ -5,8 +5,8 @@ import requests
 from telebot import types
 from threading import Thread
 from time import sleep
-
-token = "5885739598:AAEkt40kcAhWUQyoQMR02RRxBrberS3JfiE"
+                
+token = "6491735739:AAHrcYJo7mACM3dWPPwZHG5ua7oM-JDn14M"
 bot = telebot.TeleBot(token)
 
 keys = [
@@ -103,12 +103,23 @@ def stop_auto(message):
 @bot.callback_query_handler(func=lambda call: call.data == 'help')
 def help_message(call):
     chat_id = call.message.chat.id
-    help_text = """
-    أهلاً بك في بوت Redux!
-    يمكنك استخدام الأوامر التالية:
-    /start - للبدء بعملية الرشق اليدوي.
-    /stop_auto - لإيقاف عملية الرشق التلقائي.
-    /stats - لعرض إحصائيات الرشق.
+    help_text = """ معلومات عن البوت\n
+
+- تريد ترشق تظغط زر الرشق التلقائي و ترسل رابط منشورك مره واحده ينرشق تلقائي اذا ترسل الرابط بدون متضغط الزر ما يرشق 😬\n
+
+اذا ظهرت لك رسالة مثل تم رشق الرابط بنجاح. رقم الطلب: #####\n
+
+هذي تعني ان الرشق نجح 🙏\n
+
+و اذا ظهرت لك هذي الرساله
+ هذا الرابط مرتبط بطلب فعال. الرجاء الانتظار حتى اكتمال الطلب. \n
+
+ما تاثر عليه تجاهلها فقط 💻\n
+
+امر ايقاف بالبوت تحصله لما تدوس زر الرشق التلقائي 🤪\n
+
+معلومة تقدر ترشق كثير منشورات بنفس الوقت 🎰\n
+و اذا ارسلت امر الايقاف يوقف كل الروابط الي ترشقها 🫥\n
     """
     bot.send_message(chat_id, help_text)
 
@@ -143,7 +154,7 @@ def handle_message(message):
         current_thread = Thread(target=start_auto_rush, args=(chat_id, links))
         current_thread.start()
     else:
-        bot.send_message(chat_id, "أنت غير مشترك في قناة المالك @redux_i. يرجى الاشتراك أولاً لاستخدام البوت.")
+        bot.send_message(chat_id,  " قم باتباع التعليمات عن كيفيك استخدام البوت بشكل صحيح ")
 
 def start_auto_rush(chat_id, links):
     global current_key_index
@@ -155,11 +166,11 @@ def start_auto_rush(chat_id, links):
             if "order" in req:
                 order_id = req["order"]
                 bot.send_message(chat_id, f"تم رشق الرابط بنجاح. رقم الطلب: {order_id}")
-                sleep(33)
+                sleep(30)
                 current_key_index = (current_key_index + 1) % len(keys)
             elif "error" in req and "active order with this link" in req["error"]:
                 bot.send_message(chat_id, "هذا الرابط مرتبط بطلب فعال. الرجاء الانتظار حتى اكتمال الطلب.")
-                sleep(33)
+                sleep(30)
                 current_key_index = (current_key_index + 1) % len(keys)
             else:
                 bot.send_message(chat_id, "حدث خطأ غير معروف.")
